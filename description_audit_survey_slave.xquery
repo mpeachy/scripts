@@ -11,21 +11,19 @@ at "http://www.xqueryfunctions.com/xq/functx-1.0-doc-2007-01.xq";
 
 (: Edit file path here to run over a different directory (change file path syntax if not working on Windows). :)
 
-declare variable $COLL as document-node()+ := collection("file:///C:/Users/mpeach01/Desktop/harmful_description_work/EAD?recurse=yes;select=*.xml");
+declare variable $COLL as document-node()+ := collection("file:///C:/Users/mpeach01/Desktop/harmful_description_work/Slave/EAD?recurse=yes;select=*.xml");
 
 (: Change the regex here to search for different terms. This is a simple example that searches for material related to slavery or enslaved persons. :)
 <results>
     {
-        let $contains_match := $COLL//ead:c/ead:*[not(self::ead:c) and matches(string(.), '(\s|^)(Blacks)(\s|$)', 'i')]
+        let $contains_match := $COLL//ead:c/ead:*[not(self::ead:c) and matches(string(.), '((S|s?)lave(ry|s?))', 'i')]
         
         for $match in $contains_match/parent::ead:c
         return
-            <item>
-
-                <unitid>{$match/child::ead:did/ead:unitid[1]}</unitid>
-                <unittitle>{$match/child::ead:did/ead:unittitle}</unittitle>
-                <subject>{$match/child::ead:controlaccess/ead:subject}</subject>
-            </item>
+            <c
+                level="{$match/@level}"
+                id="{$match/@id}">
+                {$match/*[not(self::ead:c)]}
+            </c>
     }
 </results>
-

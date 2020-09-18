@@ -11,7 +11,7 @@ at "http://www.xqueryfunctions.com/xq/functx-1.0-doc-2007-01.xq";
 
 (: Edit file path here to run over a different directory (change file path syntax if not working on Windows). :)
 
-declare variable $COLL as document-node()+ := collection("file:///C:/Users/mpeach01/Desktop/harmful_description_work/EAD?recurse=yes;select=*.xml");
+declare variable $COLL as document-node()+ := collection("file:///C:/Users/mpeach01/Desktop/harmful_description_work/Black/EAD?recurse=yes;select=*.xml");
 
 (: Change the regex here to search for different terms. This is a simple example that searches for material related to slavery or enslaved persons. :)
 <results>
